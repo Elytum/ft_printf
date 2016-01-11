@@ -4,7 +4,9 @@
 
 int main(void)
 {
+	printf("test%02wlol\n");
+	ft_printf("test%02wlol\n");
 	// printf("%-#10x\n", 42);
-	printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");
-	ft_printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");
+	// printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");
+	// ft_printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");
 }

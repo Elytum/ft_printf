@@ -16,11 +16,16 @@ CC		=	gcc
 NAME	=	ft_printf
 MYPATH	=	$(HOME)
 #--------------Sources----------------------#
-FILES	=	ft_printf.c
+FILES	=	ft_printf.c			\
+			format/int.c		\
+			format/char.c		\
+			format/string.c		\
+			output/bufferize.c
+
 
 INC		=	-I ./includes
 LIBS	=	
-CCFLAGS	=	-Wall -Wextra -Werror -g
+CCFLAGS	=	-Wall -Wextra -g
 
 SRCS	=	$(addprefix srcs/, $(FILES))
 OBJS	=	main.c $(SRCS:.c=.o)

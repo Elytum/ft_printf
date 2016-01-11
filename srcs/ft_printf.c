@@ -2,86 +2,38 @@
 #include <unistd.h>
 #include <string.h>
 
-#define BUFF_SIZE 4096
-#define TAB_SIZE(tab) (sizeof(tab) / sizeof(tab[0]))
+#include <ft_printf.h>
 
-typedef size_t (*printf_subfunction)(const char * restrict * format, const char *flags, ...);
-
-size_t	bufferize_too_long(char *buffer, const char *str, size_t size, size_t len)
+void	init_function(size_t (*functions[MAX_CHAR])(const char * restrict * format, const char *flags, ...))
 {
-	size_t			add;
+	int		i;
 
-	if (size + len > TAB_SIZE(buffer) * 2)
-	{
-		write(1, buffer, size);
-		write(1, str, len);
-		return (0);
-	}
-	else
-	{
-		add = TAB_SIZE(buffer) - size;
-		memcpy(buffer + size, str, add);
-		write(1, buffer, TAB_SIZE(buffer));
-
-		size = len - add;
-		memcpy(buffer, str + add, size);
-		return (size);
-	}
-}
-
-void	bufferize(const char *str, size_t len, char flush)
-{
-	static char		buffer[BUFF_SIZE];
-	static size_t	size = 0;
-
-	if (size + len > TAB_SIZE(buffer))
-		size = bufferize_too_long(buffer, str, size, len);
-	else
-	{
-		memcpy(buffer + size, str, len);
-		size += len;
-	}
-	if (flush && size)
-	{
-		write(1, buffer, size);
-		size = 0;
-	}
-}
-
-size_t	handle_int(const char * restrict * format, const char *flags, ...)
-{
-	(void)flags;
-	bufferize("int", 3, 0);
-	++*format;
-	return (0);
-}
-
-size_t	handle_char(const char * restrict * format, const char *flags, ...)
-{
-	(void)flags;
-	bufferize("char", 4, 0);
-	++*format;
-	return (0);
-}
-
-size_t	handle_string(const char * restrict * format, const char *flags, ...)
-{
-	(void)flags;
-	bufferize("string", 6, 0);
-	++*format;
-	return (0);
-}
-
-void	init_function(size_t (*functions[256])(const char * restrict * format, const char *flags, ...))
-{
+	i = 0;
+	while (i < MAX_CHAR)
+		functions[i++] = &handle_default;
 	functions['i'] = &handle_int;
 	functions['c'] = &handle_char;
 	functions['s'] = &handle_string;
 }
 
-printf_subfunction	init_printf(const char * restrict * format, char *flags)
+void	clear_parameters(t_printf_data *parameters)
 {
-	static printf_subfunction	functions[256];
+	parameters->min_field_width = 0;
+}
+
+void	set_parameters(t_printf_data *parameters)
+{
+	clear_parameters(parameters);
+
+/*
+** SET FLAGS AND EXTRACT IDENTIFYING CHARACTER (i, c, s, ...)
+*/
+
+}
+
+printf_subfunction	init_printf(const char * restrict * format, t_printf_data *parameters)
+{
+	static printf_subfunction	functions[MAX_CHAR];
 	static size_t				initialized = 0;
 
 	if (initialized == 0)
@@ -89,23 +41,19 @@ printf_subfunction	init_printf(const char * restrict * format, char *flags)
 		initialized = 1;
 		init_function(functions);
 	}
-	(void)format;
-	bzero(flags, TAB_SIZE(flags));
-/*
-** SET FLAGS AND EXTRACT IDENTIFYING CHARACTER (i, c, s, ...)
-*/
-
+	set_parameters(parameters);
 	return (functions[(int)**format]);
 }
 
 size_t	handle_format(const char * restrict * format)
 {
-	static char			flags[256];
+	// static char			flags[MAX_CHAR];
+	t_printf_data		parameters;
 	printf_subfunction	function;
 
 	++*format;
-	if ((function = init_printf(format, flags)))
-		function(format, flags);
+	function = init_printf(format, &parameters);
+	function(format, parameters);
 	return (0);
 }
 
