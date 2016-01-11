@@ -16,14 +16,19 @@ CC		=	gcc
 NAME	=	ft_printf
 MYPATH	=	$(HOME)
 #--------------Sources----------------------#
-FILES	=	ft_printf.c			\
-			format/int.c		\
-			format/char.c		\
-			format/string.c		\
+FILES	=	ft_printf.c					\
+			init.c						\
+			format/init.c				\
+			format/handle.c				\
+			format/int.c				\
+			format/char.c				\
+			format/string.c				\
+			format/default.c			\
+			parameters/set_parameters.c	\
 			output/bufferize.c
 
 
-INC		=	-I ./includes
+INC		=	-I ./includes -I ./srcs/format
 LIBS	=	
 CCFLAGS	=	-Wall -Wextra -g
 
