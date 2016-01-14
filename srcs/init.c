@@ -10,6 +10,6 @@ printf_subfunction	init_printf(const char * restrict * format, t_printf_data *pa
 		initialized = 1;
 		init_function(functions);
 	}
-	set_parameters(parameters);
+	set_parameters(format, parameters);
 	return (functions[(int)**format]);
 }

@@ -29,11 +29,10 @@ FILES	=	ft_printf.c					\
 
 
 INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output
-LIBS	=	
-CCFLAGS	=	-Wall -Wextra -g
+CCFLAGS	=	-Wall -Wextra -g -O3
 
 SRCS	=	$(addprefix srcs/, $(FILES))
-OBJS	=	main.c $(SRCS:.c=.o)
+OBJS	=	main.o $(SRCS:.c=.o)
 
 #--------------Actions----------------------#
 

@@ -4,8 +4,11 @@
 
 int main(void)
 {
-	printf("test%02wlol\n");
-	ft_printf("test%02wlol\n");
+	printf("Parameters: [%s]\n", PARAMETERS);
+ft_printf("%# +-20i %c %s\n");
+// printf("test%   04.20i\n", 42);
+// printf("[%# +-20i %c %s]\n", 42, 'a', "lol");
+// printf("[%20# +-30 10.0*f %c %s]\n", 50, 1.23456789, 'a', "lol");
 	// printf("%-#10x\n", 42);
 	// printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");
 	// ft_printf("Value: %i, char: %c, string: %s\n", 42, 'c', "str");

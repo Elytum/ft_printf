@@ -1,6 +1,6 @@
 #include <ft_printf.h>
 
-size_t	handle_special(const char * restrict * format)
+size_t	handle_special(const char * restrict * format, ...)
 {
 	t_printf_data		parameters;
 	printf_subfunction	function;
