@@ -28,7 +28,7 @@ FILES	=	ft_printf.c					\
 			output/bufferize.c
 
 
-INC		=	-I ./includes -I ./srcs/format
+INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output
 LIBS	=	
 CCFLAGS	=	-Wall -Wextra -g
 

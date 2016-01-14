@@ -2,6 +2,7 @@
 # define FORMAT_H
 
 #include <definitions.h>
+#include <parameters.h>
 
 void	init_function(size_t (*functions[MAX_CHAR])(const char * restrict * format, t_printf_data parameters, ...));
 size_t	handle_special(const char * restrict * format);
