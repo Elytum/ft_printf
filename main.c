@@ -4,8 +4,16 @@
 
 int main(void)
 {
-	printf("Parameters: [%s]\n", PARAMETERS);
-ft_printf("%# +-20i %c %s\n");
+	// printf("Parameters: [%s]\n", PARAMETERS);
+ft_printf("%# +-*.*i %c %s\n", 20, 5, 42, 'c', "str");
+
+	// printf("%i\n", 424242424);
+	// printf("% hhi\n", 424242424);
+	// printf("%hi\n", 424242424);
+	// printf("%h hhi\n", 424242424);
+	// printf("%hh hi\n", 424242424);
+	// printf("%hhhi\n", 424242424);
+
 // printf("test%   04.20i\n", 42);
 // printf("[%# +-20i %c %s]\n", 42, 'a', "lol");
 // printf("[%20# +-30 10.0*f %c %s]\n", 50, 1.23456789, 'a', "lol");

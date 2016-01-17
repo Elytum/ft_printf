@@ -22,6 +22,7 @@ void	print_parameters(t_printf_data parameters)
 		++ptr;
 	}
 	printf("Width: %zu\n", parameters.width);
+	printf("Precision: %zu\n", parameters.precision);
 	printf("\n");
 }
 
@@ -49,7 +50,7 @@ void	print_parameters(t_printf_data parameters)
 // 	return (0);
 // }
 
-void	set_flags(const char * restrict * format, t_printf_data *parameters)
+void	set_flags(const char * restrict * format, t_printf_data *parameters, va_list ap)
 {
 	static const char	flags[] = PARAMETERS;
 	char				*tmp;
@@ -64,74 +65,37 @@ void	set_flags(const char * restrict * format, t_printf_data *parameters)
 		else
 			return ;
 	}
+	(void)ap;
 }
 
-void	set_width(const char * restrict * format, t_printf_data *parameters)
+// void	set_width(const char * restrict * format, t_printf_data *parameters, va_list ap)
+// {
+// 	dprintf(1, "Setting: [%s]\n", *format);
+// 	if (**format == '*')
+// 	{
+// 		dprintf(1, "Extracting int\n");
+// 		parameters->width = va_arg(ap, int);
+// 		++*format;
+// 	}
+// 	else if (**format >= '0' && **format <= '9')
+// 	{ // To be speeded up by ft_atoip(&str);
+// 		parameters->width = atoi(*format);
+// 		while (**format >= '0' && **format <= '9')
+// 			++*format;
+// 	}
+// 	// else
+// 		// parameters->width = 0;
+// 	(void)ap;
+// }
+
+void	set_precision(const char * restrict * format, t_printf_data *parameters, va_list ap)
 {
+	++*format;
+	dprintf(1, "Setting: [%s]\n", *format);
 	if (**format == '*')
 	{
-		parameters->width = 5;//extract
-		++*format;
-	}
-	else if (**format >= '0' && **format <= '9')
-	{ // To be speeded up by ft_atoip(&str);
-		parameters->width = atoi(*format);
-		while (**format >= '0' && **format <= '9')
-			++*format;
-	}
-	// else
-		// parameters->width = 0;
-}
-
-void	set_justify(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->flags[strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS] = 1;
-	++*format;
-}
-
-void	set_sign(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->flags[strchr(PARAMETERS, *FORCE_SIGN) - PARAMETERS] = 1;
-	++*format;
-}
-
-void	set_blank(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->flags[strchr(PARAMETERS, *BLANK_SPACE) - PARAMETERS] = 1;
-	++*format;
-}
-
-void	set_specification(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->flags[strchr(PARAMETERS, *SPECIFICATIONS) - PARAMETERS] = 1;
-	++*format;
-}
-
-void	set_pad(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->flags[strchr(PARAMETERS, *PAD_ZERO) - PARAMETERS] = 1;
-	++*format;
-}
-
-void	set_width_star(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->width = 5; // TO CHANGE
-	++*format;
-}
-
-void	set_width_number(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	parameters->width = atoi(*format); // TO OPTIMIZE (Automaticly mote *format)
-	while (**format >= '0' && **format <= '9')
-		++*format;
-}
-
-void	set_precision(const char * restrict * format, t_printf_data *parameters, ...)
-{
-	++*format;
-	if (**format == '*')
-	{
-		parameters->precision = 3; // TO CHANGE
+		dprintf(1, "Extracting int\n");
+		parameters->precision = va_arg(ap, int);
 		++*format;
 	}
 	else
@@ -139,10 +103,61 @@ void	set_precision(const char * restrict * format, t_printf_data *parameters, ..
 		parameters->precision = atoi(*format); // TO OPTIMIZE (Automaticly mote *format)
 		while (**format >= '0' && **format <= '9')
 			++*format;
+	(void)ap;
 	}
 }
 
-void	init_parameters_buffer(void (*functions[MAX_CHAR])(const char * restrict * format, t_printf_data *parameters, ...))
+void	set_justify(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->flags[strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS] = 1;
+	++*format;
+	(void)ap;
+}
+
+void	set_sign(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->flags[strchr(PARAMETERS, *FORCE_SIGN) - PARAMETERS] = 1;
+	++*format;
+	(void)ap;
+}
+
+void	set_blank(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->flags[strchr(PARAMETERS, *BLANK_SPACE) - PARAMETERS] = 1;
+	++*format;
+	(void)ap;
+}
+
+void	set_specification(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->flags[strchr(PARAMETERS, *SPECIFICATIONS) - PARAMETERS] = 1;
+	++*format;
+	(void)ap;
+}
+
+void	set_pad(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->flags[strchr(PARAMETERS, *PAD_ZERO) - PARAMETERS] = 1;
+	++*format;
+	(void)ap;
+}
+
+void	set_width_star(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->width = va_arg(ap, int);
+	++*format;
+	(void)ap;
+}
+
+void	set_width_number(const char * restrict * format, t_printf_data *parameters, va_list ap)
+{
+	parameters->width = atoi(*format); // TO OPTIMIZE (Automaticly mote *format)
+	while (**format >= '0' && **format <= '9')
+		++*format;
+	(void)ap;
+}
+
+void	init_parameters_buffer(void (*functions[MAX_CHAR])(const char * restrict * format, t_printf_data *parameters, va_list ap))
 {
 	bzero(functions, sizeof(*functions) * MAX_CHAR);
 	functions[(int)*LEFT_JUSTIFY] = &set_justify;
@@ -160,9 +175,10 @@ void	init_parameters_buffer(void (*functions[MAX_CHAR])(const char * restrict * 
 	functions['8'] = &set_width_number;
 	functions['9'] = &set_width_number;
 	functions['.'] = &set_precision;
+	functions['*'] = &set_width_star;
 }
 
-void	set_parameters(const char * restrict * format, t_printf_data *parameters, ...)
+void	set_parameters(const char * restrict * format, t_printf_data *parameters, va_list ap)
 {
 	static printf_setters	buffer[MAX_CHAR];
 	static char				initialized = 0;
@@ -179,15 +195,16 @@ void	set_parameters(const char * restrict * format, t_printf_data *parameters, .
 
 	// set_flags(format, parameters);
 	// set_width(format, parameters);
+	dprintf(1, "Format: [%s]\n", *format);
 	while ((function = buffer[(int)**format]))
-		function(format, parameters);
+		function(format, parameters, ap);
 	print_parameters(*parameters);
 	// printf("[%s]\n", *format);
 	// (*format)++;
 	(void)format;
 
 /*
-** SET FLAGS AND EXTRACT IDENTIFYING CHARACTER (i, c, s, ...)
+** SET FLAGS AND EXTRACT IDENTIFYING CHARACTER (i, c, s, va_list ap)
 */
 
 }

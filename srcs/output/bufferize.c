@@ -3,7 +3,48 @@
 #include <string.h>
 #include <unistd.h>
 
-size_t	bufferize_too_long(char *buffer, const char *str, size_t size, size_t len)
+static char		buffer[BUFF_SIZE];
+static size_t	size = 0;
+
+static void		bufferize_too_long_char(const char c, size_t len)
+{
+	memset(buffer + size, c, TAB_SIZE(buffer) - size);
+	len -= TAB_SIZE(buffer) - size;
+	write(1, buffer, TAB_SIZE(buffer));
+	if (len > TAB_SIZE(buffer))
+	{
+		memset(buffer, c, TAB_SIZE(buffer));
+		while (len > TAB_SIZE(buffer))
+		{
+			write(1, buffer, len);
+			len -= TAB_SIZE(buffer);
+		}
+		size = len;
+	}
+	else
+	{
+		size = len;
+		memset(buffer, c, size);
+	}
+}
+
+void			bufferize_char(const char c, size_t len, char flush)
+{
+	if (size + len > TAB_SIZE(buffer))
+		bufferize_too_long_char(c, len);
+	else
+	{
+		memset(buffer + size, c, len);
+		size += len;
+	}
+	if (flush && size)
+	{
+		write(1, buffer, size);
+		size = 0;
+	}
+}
+
+static void		bufferize_too_long(const char *str, size_t len)
 {
 	size_t			add;
 
@@ -11,7 +52,6 @@ size_t	bufferize_too_long(char *buffer, const char *str, size_t size, size_t len
 	{
 		write(1, buffer, size);
 		write(1, str, len);
-		return (0);
 	}
 	else
 	{
@@ -21,17 +61,13 @@ size_t	bufferize_too_long(char *buffer, const char *str, size_t size, size_t len
 
 		size = len - add;
 		memcpy(buffer, str + add, size);
-		return (size);
 	}
 }
 
-void	bufferize(const char *str, size_t len, char flush)
+void			bufferize(const char *str, size_t len, char flush)
 {
-	static char		buffer[BUFF_SIZE];
-	static size_t	size = 0;
-
 	if (size + len > TAB_SIZE(buffer))
-		size = bufferize_too_long(buffer, str, size, len);
+		bufferize_too_long(str, len);
 	else
 	{
 		memcpy(buffer + size, str, len);

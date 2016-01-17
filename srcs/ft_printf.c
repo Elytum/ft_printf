@@ -7,11 +7,13 @@
 int		ft_printf(const char * restrict format, ...)
 {
 	const char	*ptr;
+	va_list		ap;
 
+	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%')
-			handle_special(&format);
+			handle_special(&format, ap);
 		else
 		{
 			ptr = format;
@@ -21,5 +23,6 @@ int		ft_printf(const char * restrict format, ...)
 		}
 	}
 	bufferize(NULL, 0, 1);
+	va_end(ap);
 	return (0);
 }

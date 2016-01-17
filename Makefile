@@ -17,18 +17,19 @@ NAME	=	ft_printf
 MYPATH	=	$(HOME)
 #--------------Sources----------------------#
 FILES	=	ft_printf.c					\
-			init.c						\
 			format/init.c				\
 			format/handle.c				\
 			format/int.c				\
 			format/char.c				\
 			format/string.c				\
 			format/default.c			\
+			parameters/init.c			\
 			parameters/set_parameters.c	\
+			converters/ft_itoa.c		\
 			output/bufferize.c
 
 
-INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output
+INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters
 CCFLAGS	=	-Wall -Wextra -g -O3
 
 SRCS	=	$(addprefix srcs/, $(FILES))
