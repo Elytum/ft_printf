@@ -91,10 +91,10 @@ void	set_flags(const char * restrict * format, t_printf_data *parameters, va_lis
 void	set_precision(const char * restrict * format, t_printf_data *parameters, va_list ap)
 {
 	++*format;
-	dprintf(1, "Setting: [%s]\n", *format);
+	// dprintf(1, "Setting: [%s]\n", *format);
 	if (**format == '*')
 	{
-		dprintf(1, "Extracting int\n");
+		// dprintf(1, "Extracting int\n");
 		parameters->precision = va_arg(ap, int);
 		++*format;
 	}
@@ -195,10 +195,10 @@ void	set_parameters(const char * restrict * format, t_printf_data *parameters, v
 
 	// set_flags(format, parameters);
 	// set_width(format, parameters);
-	dprintf(1, "Format: [%s]\n", *format);
+	// dprintf(1, "Format: [%s]\n", *format);
 	while ((function = buffer[(int)**format]))
 		function(format, parameters, ap);
-	print_parameters(*parameters);
+	// print_parameters(*parameters);
 	// printf("[%s]\n", *format);
 	// (*format)++;
 	(void)format;

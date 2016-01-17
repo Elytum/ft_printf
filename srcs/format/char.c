@@ -4,8 +4,25 @@ size_t	handle_char(const char * restrict * format, t_printf_data parameters, va_
 {
 	const char	value = va_arg(ap, int);
 
-	(void)parameters;
-	bufferize(&value, 1, 0);
+	print_parameters(parameters);
+	if (parameters.width > 1)
+	{
+		if (parameters.flags[strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS])
+		{
+			bufferize(&value, 1, 0);
+			bufferize_char(' ', parameters.width - 1, 0);
+		}
+		else
+		{
+			if (parameters.flags[strchr(PARAMETERS, *PAD_ZERO) - PARAMETERS])
+				bufferize_char('0', parameters.width - 1, 0);
+			else
+				bufferize_char(' ', parameters.width - 1, 0);
+			bufferize(&value, 1, 0);
+		}
+	}
+	else
+		bufferize(&value, 1, 0);
 	++*format;
 	return (0);
 }

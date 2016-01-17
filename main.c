@@ -5,7 +5,8 @@
 int main(void)
 {
 	// printf("Parameters: [%s]\n", PARAMETERS);
-ft_printf("%# +-*.*i %c %s\n", 20, 5, 42, 'c', "str");
+ft_printf("%# +-*.*0c %i %s\n", 20, 5, 'c', 42, "str");
+printf("%# +-*.*0c %i %s\n", 20, 5, 'c', 42, "str");
 
 	// printf("%i\n", 424242424);
 	// printf("% hhi\n", 424242424);
