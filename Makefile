@@ -18,34 +18,23 @@ MYPATH	=	$(HOME)
 #--------------Sources----------------------#
 FILES	=	ft_printf.c					\
 			format/init.c				\
-			format/interprete.c			\
+			format/handle.c				\
 			format/int.c				\
 			format/char.c				\
 			format/string.c				\
-			format/percent.c			\
 			format/default.c			\
-			format/n.c					\
 			parameters/init.c			\
+			parameters/interprete.c		\
 			parameters/set_parameters.c	\
-			parameters/blank.c			\
-			parameters/justify.c		\
-			parameters/pad.c			\
-			parameters/sign.c			\
-			parameters/specification.c	\
-			parameters/width.c			\
-			parameters/precision.c		\
 			converters/ft_itoa.c		\
-			output/bufferize.c			\
-			debug/print_parameters.c
+			output/bufferize.c
 
 
-INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters -I ./srcs/debug -I ./lib
+INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters
 CCFLAGS	=	-Wall -Wextra -g -O3
 
 SRCS	=	$(addprefix srcs/, $(FILES))
 OBJS	=	main.o $(SRCS:.c=.o)
-
-LIBS	=	lib/libft.a
 
 #--------------Actions----------------------#
 
@@ -54,7 +43,6 @@ LIBS	=	lib/libft.a
 all: $(NAME)
 
 LIBRARIES:
-	make -C lib
 
 $(NAME): LIBRARIES $(OBJS)
 	$(CC) $(CCFLAGS) $(INC) $(OBJS) -o $(NAME) $(LIBS) -O3

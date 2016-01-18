@@ -5,7 +5,6 @@
 
 static char		buffer[BUFF_SIZE];
 static size_t	size = 0;
-static size_t	total = 0;
 
 static void		bufferize_too_long_char(const char c, size_t len)
 {
@@ -31,7 +30,6 @@ static void		bufferize_too_long_char(const char c, size_t len)
 
 void			bufferize_char(const char c, size_t len, char flush)
 {
-	total += len;
 	if (size + len > TAB_SIZE(buffer))
 		bufferize_too_long_char(c, len);
 	else
@@ -68,7 +66,6 @@ static void		bufferize_too_long(const char *str, size_t len)
 
 void			bufferize(const char *str, size_t len, char flush)
 {
-	total += len;
 	if (size + len > TAB_SIZE(buffer))
 		bufferize_too_long(str, len);
 	else
@@ -81,13 +78,4 @@ void			bufferize(const char *str, size_t len, char flush)
 		write(1, buffer, size);
 		size = 0;
 	}
-}
-
-size_t			get_total(e_instruction instruction)
-{
-	const size_t	ret = total;
-
-	if (instruction == RESET)
-		total = 0;
-	return (ret);
 }
