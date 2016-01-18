@@ -1,6 +1,6 @@
 #include <converters.h>
 
-char	*ft_itoa(int i, int base, int *len)
+char	*ft_itoa_base(int i, int base, int *len)
 {
 	/* Room for INT_DIGITS digits, - and '\0' */
 	static char		buf[INT_DIGITS + 2];

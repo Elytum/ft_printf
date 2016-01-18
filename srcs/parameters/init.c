@@ -11,5 +11,5 @@ printf_subfunction	init_printf(const char * restrict * format, t_printf_data *pa
 		init_function(functions);
 	}
 	set_parameters(format, parameters, ap);
-	return (functions[(int)**format]);
+	return (functions[parameters->specifier]);
 }

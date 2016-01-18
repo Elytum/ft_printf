@@ -8,7 +8,7 @@ parameters->have_width = 0;
 parameters->have_preci = 0;
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -25,7 +25,7 @@ size_t	ft_strspn(const char *s1, const char *s2)
 
 	while (*s1)
 	{
-		if (ft_strchr(s2, *s1))
+		if (ft_ft_strchr(s2, *s1))
 			return ((char *)s1 - origin);
 		++s1;
 	}
