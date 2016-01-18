@@ -33,10 +33,11 @@ FILES	=	ft_printf.c					\
 			parameters/width.c			\
 			parameters/precision.c		\
 			converters/ft_itoa.c		\
-			output/bufferize.c
+			output/bufferize.c			\
+			debug/print_parameters.c
 
 
-INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters
+INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters -I ./srcs/debug
 CCFLAGS	=	-Wall -Wextra -g -O3
 
 SRCS	=	$(addprefix srcs/, $(FILES))

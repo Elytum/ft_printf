@@ -9,6 +9,5 @@ size_t	interprete(const char * restrict * format, va_list ap)
 	function = init_printf(format, &parameters, ap);
 	function(parameters, ap);
 	++*format;
-	(void)ap;
 	return (0);
 }
