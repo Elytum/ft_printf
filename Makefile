@@ -22,6 +22,7 @@ FILES	=	ft_printf.c					\
 			format/int.c				\
 			format/char.c				\
 			format/string.c				\
+			format/percent.c			\
 			format/default.c			\
 			parameters/init.c			\
 			parameters/set_parameters.c	\
