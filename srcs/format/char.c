@@ -1,4 +1,5 @@
 #include <ft_printf.h>
+#include <libft.h>
 
 size_t	handle_char(t_printf_data parameters, va_list ap)
 {
@@ -6,14 +7,14 @@ size_t	handle_char(t_printf_data parameters, va_list ap)
 
 	if (parameters.width > 1)
 	{
-		if (parameters.flags[strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS])
+		if (parameters.flags[ft_strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS])
 		{
 			bufferize(&value, 1, 0);
 			bufferize_char(' ', parameters.width - 1, 0);
 		}
 		else
 		{
-			if (parameters.flags[strchr(PARAMETERS, *PAD_ZERO) - PARAMETERS])
+			if (parameters.flags[ft_strchr(PARAMETERS, *PAD_ZERO) - PARAMETERS])
 				bufferize_char('0', parameters.width - 1, 0);
 			else
 				bufferize_char(' ', parameters.width - 1, 0);

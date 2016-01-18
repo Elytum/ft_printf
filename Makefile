@@ -39,11 +39,13 @@ FILES	=	ft_printf.c					\
 			debug/print_parameters.c
 
 
-INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters -I ./srcs/debug
+INC		=	-I ./includes -I ./srcs/format -I ./srcs/parameters -I ./srcs/output -I ./srcs/converters -I ./srcs/debug -I ./lib
 CCFLAGS	=	-Wall -Wextra -g -O3
 
 SRCS	=	$(addprefix srcs/, $(FILES))
 OBJS	=	main.o $(SRCS:.c=.o)
+
+LIBS	=	lib/libft.a
 
 #--------------Actions----------------------#
 
