@@ -13,7 +13,7 @@ int		ft_printf(const char * restrict format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			handle_special(&format, ap);
+			interprete(&format, ap);
 		else
 		{
 			ptr = format;

@@ -18,13 +18,20 @@ MYPATH	=	$(HOME)
 #--------------Sources----------------------#
 FILES	=	ft_printf.c					\
 			format/init.c				\
-			format/handle.c				\
+			format/interprete.c			\
 			format/int.c				\
 			format/char.c				\
 			format/string.c				\
 			format/default.c			\
 			parameters/init.c			\
 			parameters/set_parameters.c	\
+			parameters/blank.c			\
+			parameters/justify.c		\
+			parameters/pad.c			\
+			parameters/sign.c			\
+			parameters/specification.c	\
+			parameters/width.c			\
+			parameters/precision.c		\
 			converters/ft_itoa.c		\
 			output/bufferize.c
 

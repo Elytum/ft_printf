@@ -1,10 +1,9 @@
 #include <ft_printf.h>
 
-size_t	handle_char(const char * restrict * format, t_printf_data parameters, va_list ap)
+size_t	handle_char(t_printf_data parameters, va_list ap)
 {
 	const char	value = va_arg(ap, int);
 
-	print_parameters(parameters);
 	if (parameters.width > 1)
 	{
 		if (parameters.flags[strchr(PARAMETERS, *LEFT_JUSTIFY) - PARAMETERS])
@@ -23,6 +22,5 @@ size_t	handle_char(const char * restrict * format, t_printf_data parameters, va_
 	}
 	else
 		bufferize(&value, 1, 0);
-	++*format;
 	return (0);
 }

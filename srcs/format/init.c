@@ -1,6 +1,6 @@
 #include <ft_printf.h>
 
-void	init_function(size_t (*functions[MAX_CHAR])(const char * restrict * format, t_printf_data parameters, va_list ap))
+void	init_function(size_t (*functions[MAX_CHAR])(t_printf_data parameters, va_list ap))
 {
 	int		i;
 
