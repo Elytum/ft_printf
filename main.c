@@ -2,11 +2,19 @@
 #include <stdio.h>
 #include <ft_printf.h>
 
+#define TEST_SAMPLE "%# +-*.*% %i %s\n", 20, 5, 42, "str"
+
 int main(void)
 {
-	// printf("Parameters: [%s]\n", PARAMETERS);
-ft_printf("%# +-*.*0% %i %s\n", 20, 5, 42, "str");
-printf("%# +-*.*0% %i %s\n", 20, 5, 42, "str");
+	int original, homemade;
+
+	homemade = ft_printf(TEST_SAMPLE);
+	original = printf(TEST_SAMPLE);
+	printf("\nHomemade: %i\nOriginal: %i\n", homemade, original);
+
+// int i;
+// ft_printf("Test: %n", &i); ft_printf("%i\n", i);
+// printf("Test: %n", &i); printf("%i\n", i);
 
 	// printf("%i\n", 424242424);
 	// printf("% hhi\n", 424242424);

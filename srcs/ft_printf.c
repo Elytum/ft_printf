@@ -24,5 +24,5 @@ int		ft_printf(const char * restrict format, ...)
 	}
 	bufferize(NULL, 0, 1);
 	va_end(ap);
-	return (0);
+	return (get_total(RESET));
 }
