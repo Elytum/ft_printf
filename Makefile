@@ -52,6 +52,7 @@ OBJS	=	main.o $(SRCS:.c=.o)
 all: $(NAME)
 
 LIBRARIES:
+	make -C lib
 
 $(NAME): LIBRARIES $(OBJS)
 	$(CC) $(CCFLAGS) $(INC) $(OBJS) -o $(NAME) $(LIBS) -O3
