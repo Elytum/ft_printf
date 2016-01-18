@@ -12,9 +12,10 @@ int main(void)
 	original = printf(TEST_SAMPLE);
 	printf("\nHomemade: %i\nOriginal: %i\n", homemade, original);
 
-// int i;
-// ft_printf("Test: %n", &i); ft_printf("%i\n", i);
-// printf("Test: %n", &i); printf("%i\n", i);
+int i;
+homemade = ft_printf("Test: %n", &i); ft_printf("%i\n", i);
+original = printf("Test: %n", &i); printf("%i\n", i);
+printf("\nHomemade: %i\nOriginal: %i\n", homemade, original);
 
 	// printf("%i\n", 424242424);
 	// printf("% hhi\n", 424242424);

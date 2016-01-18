@@ -24,6 +24,7 @@ FILES	=	ft_printf.c					\
 			format/string.c				\
 			format/percent.c			\
 			format/default.c			\
+			format/n.c					\
 			parameters/init.c			\
 			parameters/set_parameters.c	\
 			parameters/blank.c			\

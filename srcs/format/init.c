@@ -23,4 +23,5 @@ void	init_function(size_t (*functions[MAX_CHAR])(t_printf_data parameters, va_li
 	functions['c'] = &handle_char;
 	// functions['C'] = &handle_int;
 	functions['%'] = &handle_percent;
+	functions['n'] = &handle_n;
 }

@@ -24,4 +24,6 @@ size_t	handle_char(t_printf_data parameters, va_list ap);		// c
 size_t	handle_percent(t_printf_data parameters, va_list ap);	// %
 size_t	handle_default(t_printf_data parameters, va_list ap);	// Undefined
 
+size_t	handle_n(t_printf_data parameters, va_list ap);			// n
+
 #endif
